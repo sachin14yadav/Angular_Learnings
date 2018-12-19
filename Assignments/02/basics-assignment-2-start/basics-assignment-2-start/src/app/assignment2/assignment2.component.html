@@ -1,0 +1,13 @@
+<hr>
+<label>Enter Username: </label>
+<input type="text"
+    class="form-control"
+    [(ngModel)]="username"
+    (input)="checkInput($event)">
+
+<button 
+    class="btn btn-primary"
+    [disabled]="isSubmitDisabled"
+    (click)="onSubmitClick()">Submit</button>
+<hr>
+<p>Username entered is: {{ username }}</p>

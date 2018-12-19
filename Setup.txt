@@ -1,0 +1,25 @@
+To install angular:
+Run node-v11.1.0-x64.msi
+
+To start Angular server:
+
+Start cmd in admin mode
+
+go to D drive --> d:
+go to project path --> cd Saka\Session\Angular\01\my-first-angular
+
+Install/Initialize project --> npm install
+
+Start ng server --> ng serve
+	On different port --> ng serve --port 4201
+
+To create new project from CLI -->ng create project_name
+	To create new component from CLI --> ng g c componentName, ng g c componentName --spec false
+
+VS Code extensions:
+Emmet and Angular emmet for VS Code,
+TS Lint,
+Path Intellisense,
+Bracket Pair colorizer,
+IntelliSense for CSS class names in HTML,
+Angular2 switcher,
