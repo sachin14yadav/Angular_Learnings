@@ -22,4 +22,4 @@ TS Lint,
 Path Intellisense,
 Bracket Pair colorizer,
 IntelliSense for CSS class names in HTML,
-Angular2 switcher, adding a line
+Angular2 switcher,
