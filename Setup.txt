@@ -15,7 +15,9 @@ Start ng server --> ng serve
 
 To create new project from CLI -->ng create project_name
 	To create new component from CLI --> ng g c componentName, ng g c componentName --spec false
-
+	To create new directive from CLI --> ng g d directive-name, ng g d better-highlight
+	
+	
 VS Code extensions:
 Emmet and Angular emmet for VS Code,
 TS Lint,
@@ -23,3 +25,4 @@ Path Intellisense,
 Bracket Pair colorizer,
 IntelliSense for CSS class names in HTML,
 Angular2 switcher,
+Debugger for Chrome

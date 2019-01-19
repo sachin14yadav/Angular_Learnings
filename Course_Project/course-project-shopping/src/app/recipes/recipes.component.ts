@@ -1,26 +1,19 @@
 import { Recipe } from './recipe.model';
 import { Component, OnInit } from '@angular/core';
+import { RecipeService } from './recipe.service';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css']
+  styleUrls: ['./recipes.component.css'],
+  providers: [RecipeService]
 })
 export class RecipesComponent implements OnInit {
-  recipeDetails = { recipeName: '', recipeDesc: '', recipeIngre: ''};
+  recipeDetails = { recipeName: '', recipeDesc: '', recipeIngre: '' };
   selectedRecipe: Recipe;
 
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
   }
-
-  onRecipeEmit(recipeData: {recipeName: string, recipeDesc: string, recipeIngredient: string}) {
-    this.recipeDetails.recipeDesc = recipeData.recipeDesc;
-    this.recipeDetails.recipeName = recipeData.recipeName;
-    this.recipeDetails.recipeIngre = recipeData.recipeIngredient;
-    // console.log(this.recipeDetails);
-  }
-
 }

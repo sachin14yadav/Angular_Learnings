@@ -7,10 +7,4 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class HeaderComponent {
 
     @Output() headerClickEmit = new EventEmitter<string>();
-
-    onSelect(feature: string) {
-        this.headerClickEmit.emit(feature);
-        // console.log('Inside recipes');
-    }
-
 }
