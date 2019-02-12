@@ -1,0 +1,11 @@
+Issues_CourseProject
+
+There is no directive with "exportAs" set to "ngForm" ("<div class="row">
+
+missing FormModule imports in app.module.ts
+
+Uncaught Error: Can't resolve all parameters for AuthenticationService: (?).
+Missed @Injectable
+
+Usually this means you have a circular dependencies. This might be caused by using 'barrel' index.ts files.
+Restarted using ng serve

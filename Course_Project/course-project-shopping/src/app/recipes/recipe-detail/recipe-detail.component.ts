@@ -10,7 +10,7 @@ import { ActivatedRoute, Router, Data, Params } from '@angular/router';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent implements OnInit {
-  private recipe: Recipe;
+  public recipe: Recipe;
   private recipeId: number;
   constructor(
     private recipeService: RecipeService,
@@ -27,5 +27,10 @@ export class RecipeDetailComponent implements OnInit {
 
   onAddToShoppingList() {
     this.recipeService.onAddToShoppingList(this.recipe.ingredients);
+  }
+
+  onDeleteRecipe() {
+    this.recipeService.deleteRecipe(this.recipeId);
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }

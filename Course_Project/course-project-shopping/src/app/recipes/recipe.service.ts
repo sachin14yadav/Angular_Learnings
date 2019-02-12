@@ -1,10 +1,16 @@
+import { AuthenticationService } from './../auth/authentication.service';
+import { Subject } from 'rxjs';
 import { Recipe } from './recipe.model';
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.mode';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Http, Headers, Response } from '@angular/http';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class RecipeService {
+  recipeChange = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -21,7 +27,27 @@ export class RecipeService {
     )
   ];
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private http: Http,
+    private authenticationService: AuthenticationService
+  ) {}
+
+  addRecipe(newRecipe: Recipe) {
+    this.recipes.push(newRecipe);
+    this.recipeChange.next(this.recipes.slice());
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe;
+    this.recipeChange.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipeChange.next(this.recipes.slice());
+  }
+
   getRecipe() {
     return this.recipes.slice();
   }
@@ -32,5 +58,38 @@ export class RecipeService {
 
   onAddToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.onAddToShoppingList(ingredients);
+  }
+
+  storeRecipes() {
+    return this.http.put(
+      'https://ng-recipe-book-7c810.firebaseio.com/recipes.json?auth=' +
+        this.authenticationService.token,
+      this.getRecipe()
+    );
+  }
+
+  fetchRecipes() {
+    return this.http
+      .get(
+        'https://ng-recipe-book-7c810.firebaseio.com/recipes.json?auth=' +
+          this.authenticationService.token
+      )
+      .pipe(
+        map((response: Response) => {
+          const recipes: Recipe[] = response.json();
+          for (let recipe of recipes) {
+            if (!recipe['ingredients']) {
+              recipe['ingredients'] = [];
+            } else {
+              this.shoppingListService.onAddToShoppingList(recipe.ingredients);
+            }
+          }
+          return recipes;
+        })
+      )
+      .subscribe((recipes: Recipe[]) => {
+        this.recipes = recipes;
+        this.recipeChange.next(this.recipes.slice());
+      });
   }
 }
